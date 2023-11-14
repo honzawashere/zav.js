@@ -24,9 +24,6 @@ function appendScript(scriptPath) {
 }
 
 function run() {
-    window.onhashchange = () => {
-        run()
-    }
 
     if (document.URL === "https://student.zav.cz/#!/login") {
         appendScript("/js/login/loginPage.js")
