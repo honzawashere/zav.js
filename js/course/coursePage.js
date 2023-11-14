@@ -48,6 +48,9 @@ function run() {
             if(currentTask.includes("bez mezer")) {
                 disableSpacesBetweenText = true
                 textToType = document.querySelector("#scrollableText > div.ql-editor > p").innerText.replace(/\s/g, "").split("")
+            } else {
+                disableSpacesBetweenText = false
+                textToType = document.querySelector("#scrollableText > div.ql-editor > p").split("")
             }
         }
     }
