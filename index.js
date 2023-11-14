@@ -1,83 +1,37 @@
-let isEnabled = false
-let schoolMode = false
-
 const style = 'background-color:#A1019D;color:white;font-size:2em;'
 const style2 = 'background-color:#A1019D;color:white;font-size:1em;'
+
+function appendScript(scriptPath) {
+    var xhr = new XMLHttpRequest()
+    
+    xhr.onreadystatechange = () => {
+        if(xhr.responseText) {
+            var script = document.createElement("script")
+            script.innerHTML = xhr.responseText + " run()"
+            document.body.appendChild(script)
+        }
+    }
+
+    xhr.open("GET", "https://raw.githubusercontent.com/honzawashere/zav-js/main" + scriptPath)
+    xhr.send()
+}
 
 function injectScript() {
     console.log("%c@honzawashere", style)
     console.log("%c[ZAV] Injecting...", style2)
 
-    window.addEventListener("hashchange", () => {
-        handlePageNavigation()
-    })
-
-    if (document.URL === "https://student.zav.cz/#!/login") {
-        if (schoolMode === false) {
-            loginPage()
-        }
-    }
-    if (document.URL === "https://student.zav.cz/#!/courses") {
-        if (schoolMode === false) {
-            editDog()
-        }
-    }
-    if (document.URL.startsWith("https://student.zav.cz/#!/course/")) {
-        coursePageHned()
-    }
+    appendScript("/js/base/load.js")
 
     console.log(`%c[ZAV] Injected!`, style2)
-}
-
-function loginPage() {
-    if (document.readyState === "loading") {
-        console.log(`%c[ZAV]Please wait for the page to get loaded.`, style2)
-    }
-
-    const main_img = document.querySelector("#views-placeholder > div > div > div:nth-child(1) > div.col.d-flex.flex-row > h1 > img")
-    const bg = document.querySelector("#views-placeholder > div")
-    const button1 = document.querySelector("#views-placeholder > div > div > div:nth-child(2) > div:nth-child(1) > form > input")
-    const button2 = document.querySelector("#views-placeholder > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2) > div > button")
-    const loading = document.querySelector("#views-placeholder > div > div > div.row.flex-grow-1.align-items-center.justify-content-center > div")
-    const a = document.querySelector("#views-placeholder > div > div > div:nth-child(2) > div.col.d-flex.flex-column.d-none.d-lg-flex > div:nth-child(2) > p:nth-child(2) > a")
-
-    bg.style.background = "#A1019D"
-    bg.style.backgroundImage = "url(https://student.zav.cz/dist/4b980caddd636d7aaf798f3a4a227502.png)"
-    bg.style.backgroundSize = "350px"
-    main_img.src = "https://raw.githubusercontent.com/honzawashere/zav-js/main/zav-logo-barevne-student-cs.png"
-    button1.style.backgroundColor = "#A1019D"
-    button1.style.borderColor = "#A1019D"
-    button1.style.color = "white"
-    button2.style.backgroundColor = "#A1019D"
-    button2.style.borderColor = "#A1019D"
-    button2.style.color = "white"
-    loading.style.color = "#A1019D !important"
-    a.style.color = "#A1019D !important"
-}
-
-function homePage() {
-    const observer = new MutationObserver(() => {
-        if (document.querySelector("#page-content-wrapper > div > div.flex-grow-1 > div.row.h-50.pb-4.zav-min-height > div.col.d-none.d-lg-flex.flex-column.fade-in.two > div > div > div:nth-child(1) > div.speech-bubble.bg-primary.h-50.text-white > span")) {
-            observer.disconnect()
-            editDog()
-        }
-    })
-    observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true })
-}
-
-function editDog() {
-    document.querySelector("#page-content-wrapper > div > div.flex-grow-1 > div.row.h-50.pb-4.zav-min-height > div.col.d-none.d-lg-flex.flex-column.fade-in.two > div > div > div:nth-child(1) > div.speech-bubble.bg-primary.h-50.text-white > span").innerHTML = "Jsem Váš úhlavní nepřítel! :)"
 }
 
 function handlePageNavigation() {
     console.log(`%c${document.URL}`, style2)
     if (document.URL === "https://student.zav.cz/#!/login") {
-        loginPage()
-        return
+        appendScript("/js/login/loginPage.js")
     }
     if (document.URL === "https://student.zav.cz/#!/courses") {
-        homePage()
-        return
+        appendScript("/js/homepage/homePage.js")
     }
     if (document.URL === "https://student.zav.cz/#!" || document.URL === "https://student.zav.cz/#!/protocol") {
         return
