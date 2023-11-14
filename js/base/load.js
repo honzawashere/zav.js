@@ -1,5 +1,5 @@
-const style2 = 'background-color:#A1019D;color:white;font-size:1em;'
-const style3 = 'background-color:white;color:#A1019D;font-size:1em;'
+var style2 = 'background-color:#A1019D;color:white;font-size:1em;'
+var style3 = 'background-color:white;color:#A1019D;font-size:1em;'
 
 function appendScript(scriptPath) {
     var xhr = new XMLHttpRequest()
