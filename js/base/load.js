@@ -33,4 +33,7 @@ function run() {
     if (document.URL === "https://student.zav.cz/#!/courses") {
         appendScript("/js/homepage/homePage.js")
     }
+    if (document.URL.startsWith("https://student.zav.cz/#!/course/")) {
+        appendScript("/js/course/coursePage.js")
+    }
 }

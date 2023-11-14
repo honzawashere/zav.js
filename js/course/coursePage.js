@@ -1,5 +1,9 @@
 function run() {
-    const observer = new MutationObserver(() => {
+    let currentTask;
+    let textToType;
+    let disableSpacesBetweenText = false
+
+    var observer = new MutationObserver(() => {
         if (document.querySelector("#textInput > div.ql-editor > p")) {
             observer.disconnect()
             if (document.querySelector("#zavScriptButton")) return
@@ -10,11 +14,11 @@ function run() {
     observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true })
 
     function insertMenu() {
-        const menuSpan = document.createElement("span")
+        var menuSpan = document.createElement("span")
         menuSpan.role = "presentation"
         menuSpan.classList.add("dropdown-item-text")
 
-        const menuButton = document.createElement("a")
+        var menuButton = document.createElement("a")
         menuButton.innerHTML = "Enable Script"
         menuButton.style.color = "#A1019D"
         menuButton.href = ""
@@ -29,9 +33,29 @@ function run() {
                 menuButton.innerHTML = "Enable Script"
             }
         }
-        menu_span.appendChild(menuButton)
+        menuSpan.appendChild(menuButton)
         document.getElementsByClassName("dropdown-menu-left")[0].id = "zav_user_menu"
-        document.querySelector("#zav_user_menu").appendChild(menu_span)
-        console.log("%c[ZAV] Created Menu Button to Enable/Disable Script", style2)
+        document.querySelector("#zav_user_menu").appendChild(menuSpan)
+
+        getCurrentTask()
     }
+
+    function getCurrentTask() {
+        currentTask = document.querySelector("p").innerText
+        console.log(currentTask)
+
+        if(currentTask !== undefined) {
+            if(currentTask.includes("bez mezer")) {
+                disableSpacesBetweenText = true
+                textToType = document.querySelector("#scrollableText > div.ql-editor > p").innerText.replace(/\s/g, "").split("")
+            }
+        }
+    }
+
+    var observer = new MutationObserver(() => {
+        if (document.querySelector("#animateme > span")) {
+            getCurrentTask()
+        }
+    })
+    observer.observe(document.querySelector("p"), { attributes: true, childList: true, subtree: true })
 }
