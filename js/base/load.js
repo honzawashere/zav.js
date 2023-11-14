@@ -24,6 +24,9 @@ function appendScript(scriptPath) {
 }
 
 function run() {
+    window.addEventListener("hashchange", () => {
+        console.log(document.URL)
+    })
 
     if (document.URL === "https://student.zav.cz/#!/login") {
         appendScript("/js/login/loginPage.js")
