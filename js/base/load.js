@@ -14,6 +14,7 @@ function appendScript(scriptPath) {
             script.innerHTML = xhr.responseText + " run()"
             document.body.appendChild(script)
             console.log(`%c[ZAV] Script loaded: %c${scriptPath}`, style2, style3)
+            script.remove()
         }
     }
 
