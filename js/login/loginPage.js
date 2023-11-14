@@ -11,4 +11,5 @@ function run() {
     document.querySelector("#views-placeholder > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(2) > div > button").style.color = "white"
     document.querySelector("#views-placeholder > div > div > div.row.flex-grow-1.align-items-center.justify-content-center > div").style.color = "#A1019D !important"
     document.querySelector("#views-placeholder > div > div > div:nth-child(2) > div.col.d-flex.flex-column.d-none.d-lg-flex > div:nth-child(2) > p:nth-child(2) > a").style.color = "#A1019D !important"
+    return
 }
