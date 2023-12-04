@@ -2,7 +2,8 @@ function run() {
     let currentTask;
     let textToType;
     let disableSpacesBetweenText = false
-
+    let isEnabled = false;
+    
     var observer = new MutationObserver(() => {
         if (document.querySelector("#textInput > div.ql-editor > p")) {
             observer.disconnect()
