@@ -25,18 +25,4 @@ function injectScript() {
     console.log(`%c[ZAV] Injected!`, style2)
 }
 
-function handlePageNavigation() {
-    console.log(`%c${document.URL}`, style2)
-    if (document.URL === "https://student.zav.cz/#!/login") {
-        appendScript("/js/login/loginPage.js")
-    }
-    if (document.URL === "https://student.zav.cz/#!/courses") {
-        appendScript("/js/homepage/homePage.js")
-    }
-    if (document.URL === "https://student.zav.cz/#!" || document.URL === "https://student.zav.cz/#!/protocol") {
-        return
-    }
-    appendScript("/js/course/coursePage.js")
-}
-
 injectScript()
