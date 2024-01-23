@@ -35,14 +35,4 @@ function run() {
             appendScript("/js/course/coursePage.js")
         }
     })
-
-    if (document.URL === "https://student.zav.cz/#!/login") {
-        appendScript("/js/login/loginPage.js")
-    }
-    if (document.URL === "https://student.zav.cz/#!/courses") {
-        appendScript("/js/homepage/homePage.js")
-    }
-    if (document.URL.startsWith("https://student.zav.cz/#!/course/")) {
-        appendScript("/js/course/coursePage.js")
-    }
 }
